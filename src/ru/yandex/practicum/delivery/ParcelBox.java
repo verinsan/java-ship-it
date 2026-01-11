@@ -49,17 +49,20 @@ public class ParcelBox<T extends Parcel> {
         if (parcels.isEmpty()) {
             System.out.println("Коробка пуста");
         } else {
-            for (int i = 0; i < parcels.size(); i++) {
-                T parcel = parcels.get(i);
-                System.out.println((i + 1) + ". " + parcel.getDescription());
-                System.out.println("Вес: " + parcel.getWeight() + " кг");
-                System.out.println("Адрес: " + parcel.getDeliveryAddress());
+            for (int index = 0; index < parcels.size(); index++) {
+                T parcel = parcels.get(index);
+                System.out.println(String.format("%d. %s", index + 1, parcel.getDescription()));
+                System.out.println(String.format("Вес: %d кг", parcel.getWeight()));
+                System.out.println(String.format("Адрес: %s", parcel.getDeliveryAddress()));
 
                 if (parcel instanceof FragileParcel) {
                     System.out.println("Тип: Хрупкая посылка");
                 } else if (parcel instanceof PerishableParcel) {
                     System.out.println("Тип: Скоропортящаяся посылка");
-                    System.out.println("Срок годности: " + ((PerishableParcel) parcel).getTimeToLive() + " дней");
+                    System.out.println(
+                            String.format("Срок годности: %d дней",
+                                    ((PerishableParcel) parcel).getTimeToLive())
+                    );
                 } else {
                     System.out.println("Тип: Стандартная посылка");
                 }
